@@ -139,6 +139,4 @@ async def menu_handler(event):
             print(f"Skipped {sender.username or sender_id}, sent recently.")
 
 
-print("Bot running, waiting for messages...")
-client.start()
-client.run_until_disconnected()
+print("Bot running, waiting for messages...") client.connect() if not client.is_user_authorized(): print("❌ La sesión no está autorizada. Debes crear el archivo mi_sesion.session localmente y subirlo como secreto en GitHub.") exit(1) client.run_until_disconnected()
