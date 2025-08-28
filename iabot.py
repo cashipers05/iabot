@@ -86,7 +86,8 @@ last_sent_time = {}
 COOLDOWN = 4 * 60 * 60  # 4 horas
 
 # ====== RUTA DE FOTO ======
-menu_image_path = r"C:\Users\Emerson\Desktop\photo_2025-06-09_23-57-59.jpg"
+menu_image_path = "photo_2025-06-09_23-57-59.jpg"
+
 
 # ====== BOT ======
 client = TelegramClient(session_name, api_id, api_hash)
@@ -139,12 +140,19 @@ async def menu_handler(event):
             print(f"Skipped {sender.username or sender_id}, sent recently.")
 
 
-print("Bot running, waiting for messages...")
+import asyncio
 
-client.connect()
+async def main():
+    print("Bot running, waiting for messages...")
 
-if not client.is_user_authorized():
-    print("❌ La sesión no está autorizada. Debes crear el archivo mi_sesion.session localmente y subirlo como secreto en GitHub.")
-    exit(1)
+    await client.connect()
 
-client.run_until_disconnected()
+    if not await client.is_user_authorized():
+        print("❌ La sesión no está autorizada. Debes crear el archivo mi_sesion.session localmente y subirlo como secreto en GitHub.")
+        exit(1)
+
+    await client.run_until_disconnected()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
